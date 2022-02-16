@@ -31,5 +31,5 @@ class Plane(Vehicle):
             self.cargo += number
 
     def remove_all_cargo(self):
-        print(self.cargo)
+        return self.cargo
         self.cargo = 0

@@ -3,7 +3,7 @@ from homework_02 import exceptions
 
 
 class Vehicle:
-    def __init__(self, weight=None, started=None, fuel=None, fuel_consumption=None):
+    def __init__(self, weight=0, started=False, fuel=0, fuel_consumption=0):
         self.weight = weight
         self.started = started
         self.fuel = fuel
@@ -13,22 +13,18 @@ class Vehicle:
     # проверяет, что топлива больше нуля, и обновляет состояние started,
     # иначе выкидывает исключение exceptions.LowFuelError
     def start(self):
-        if self.started is False:
+        if not self.started:
             if self.fuel > 0:
                 self.started = True
-                # print("Let's go!")
             else:
                 raise exceptions.LowFuelError
-        # else:
-        #     print("Let's go!")
 
     # добавьте метод move, который проверяет, что достаточно топлива для
     # преодоления переданной дистанции, и изменяет количество оставшегося топлива,
     # иначе выкидывает исключение exceptions.NotEnoughFuel
     def move(self, distance):
-        fuel = distance / self.fuel_consumption
-        if self.fuel >= fuel:
-            self.fuel = fuel
+        if self.fuel >= distance * self.fuel_consumption:
+            self.fuel -= distance * self.fuel_consumption
         else:
             raise exceptions.NotEnoughFuel
 
